@@ -1,0 +1,30 @@
+{
+  "id": "3468384",
+  "name": "窗口框",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1299794",
+      "name": "Maximize-1",
+      "font_class": "3zuidahua-1",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "4118038",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "eb6a",
+      "unicode_decimal": 60266
+    },
+    {
+      "icon_id": "6160694",
+      "name": "最小化",
+      "font_class": "zuixiaohua",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    }
+  ]
+}
