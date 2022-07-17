@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using TIBCO.Rendezvous;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string input = "{[method]=\"abc\" [method2]=aa [a]={[key1]=\"20：30 z时-间\" [key2]=value2} }";
+
+            Message message = Parse(input);
+            Console.WriteLine(message.ToString());
+            //string input = "a1 b2 c3";
+            //IEnumerable<Match> enumerable = Regex.Matches(input, @"(?:\w+)").Cast<Match>();
+        }
+
+        public static Message Parse(string input)
+        {
+            Message message = new Message();
+            MatchCollection matchCollection = Regex.Matches(input, @"\[\w+\]=""?[\s\w：-]+""?|\[\w+\]={[^}]+}");//
+            foreach (var item in matchCollection)
+            {
+                string pair = item.ToString();
+                if (pair.Contains("{") && pair.Contains("}"))
+                {
+                    var key = pair.Substring(0, pair.IndexOf("="));
+                    var value = pair.Substring(pair.IndexOf("=")+1);
+                    Message message1 = Parse(value);
+                    message.AddField(key, message1);
+                }
+                else
+                {
+                    string[] strings = Regex.Split(pair, "=");
+                    message.AddField(strings[0], strings[1].Trim('"'));
+                }
+            }
+            return message;
+        }
+
+
+    }
+}
